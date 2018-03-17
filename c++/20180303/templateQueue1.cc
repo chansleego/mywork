@@ -32,7 +32,10 @@ class Queue
 };
 
 template<typename T, int JSize>
-Queue<T, JSize>::Queue()
+Queue<T, JSize>::Queue()//记得初始化，分配空间
+: _front(0)
+, _rear(0)
+, _parr(new T[JSize]())
 {
     cout << "Queue()" << endl;
 }
@@ -64,8 +67,8 @@ void Queue<T, JSize>::push(const T & data)
 {
     if(!full())
 	{
-	    _parr[++_rear] = data;
-		_rear %= JSize;
+	    _parr[_rear++] = data;//前置++和后置++的使用
+		_rear %= JSize;//取模防止越界
 	}
 	else
 		cout << "This Queue is full !" << endl;
@@ -100,11 +103,11 @@ void test()
 {
 	Queue<int, 10> queue;
 	cout << "队空 ？" << queue.empty() <<endl;
-    queue.push(1);
+    //queue.push(1);
 	cout << "队空 ？" << queue.empty() <<endl;
     for(int idx = 2; idx < 10 ; idx++)
 	{
-	   // _parr[idx] = idx;
+	    //_parr[idx] = idx;
 	   queue.push(idx);
 	}
      

@@ -1,66 +1,44 @@
  ///
- /// @file    map.cc
+ /// @file    multimap.cc
  /// @author  Chans(加油，慢一点没关系)
- /// @date    2018-03-20 16:30:40
+ /// @date    2018-03-22 15:25:37
  ///
-#include <utility>
 #include <string>
-#include <map> 
+#include <map>
 #include <iostream>
+#include <utility>
+
 using std::cout;
 using std::endl;
-using std::pair;
-using std::map;
 using std::string;
+using std::multimap;
+using std::pair;
 
-void test0(void)
+void test(void)
 {
-    std::pair<int, string> t(1234, "阿里巴巴");
-	cout << t.first << " ---> " << t.second << endl;
-}
-//#if 0
-void test1(void)
-{
-    map<int, string> mapIntStr = {
-		pair<int, string>(1, "北京"),
-		pair<int, string>(2, "深圳"),
-		pair<int, string>(3, "杭州")
+    multimap<int, string, std::greater<int>> multimapIntStr = {
+	    pair<int, string>(1,"BeiJing"),
+		pair<int, string>(2, "ShenZhen"),
+		pair<int, string>(3, "GuangZhou"),
+		pair<int, string>(4, "SuZhou")
 	};
-	for(auto & elem : mapIntStr)
+    
+	for(auto & elem : multimapIntStr)
 	{
-	    cout << elem.first << " ---> " << elem.second << endl;
+	    cout << elem.first << "--->" << elem.second << endl;
 	}
-}
-
-void test2(void)
-{
-    map<string, string> mapIntStr = {
-		pair<string, string>("s1", "北京"),
-		pair<string, string>("s2", "深圳"),
-		pair<string, string>("s3", "杭州")
-	};
-
-	for(auto & elem : mapIntStr)
-	{
-	    cout << elem.first << " ---> " << elem.second << endl;
-	}   
-
-    cout << mapIntStr["s1"] << endl;
-    cout << mapIntStr["s2"] << endl;
-
-//	mapInStr["s0"] = "上海";
+     
+	multimap<int, string, std::greater<int>>::const_iterator cit;
 	
-	cout << mapIntStr["s1"] << endl;
-
+	for(cit = multimapIntStr.begin(); cit != multimapIntStr.end(); ++cit)
+	{
+	    cout << cit->first << "--->" << cit->second << endl;
+	}
+	
 }
-
-//#endif
-
 
 int main(void)
 {
-   // test0();
-   // test1();
-	test2();
+    test();
 	return 0;
 }
